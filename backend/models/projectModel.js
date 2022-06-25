@@ -15,7 +15,7 @@ const projectSchema = new mongoose.Schema(
 		logoPNGImage: {
 			type: String,
 			required: true,
-			default: 'default.jpg',
+			default: 'logo.jpg',
 		},
 		projectType: {
 			type: String,
