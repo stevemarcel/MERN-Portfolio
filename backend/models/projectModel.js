@@ -39,26 +39,12 @@ const projectSchema = new mongoose.Schema(
 				default: 'default.jpg',
 			},
 		],
-		// projectOutline: {
-		// 	type: String,
-		// 	required: true,
-		// },
-		// colour: {
-		// 	type: String,
-		// 	required: true,
-		// 	default: 'default.jpg',
-		// },
-		// typeface: {
-		// 	type: String,
-		// 	required: true,
-		// 	default: 'default.jpg',
-		// },
 	},
 	{
 		timestamps: true,
 	},
 );
 
-const Project = mongoose.model('User', projectSchema);
+const Project = mongoose.model('Project', projectSchema);
 
 export default Project;
