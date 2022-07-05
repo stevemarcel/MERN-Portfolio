@@ -27,3 +27,5 @@ yarn-error.log*
 .env.test
 *.log
 *.db
+
+data/
