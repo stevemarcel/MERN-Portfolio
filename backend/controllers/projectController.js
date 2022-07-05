@@ -1,8 +1,9 @@
 import asyncHandler from 'express-async-handler';
+import Projects from '../models/Projects.js';
 
-// @desc Get projects
+// @desc Get all projects
 // @route GET /api/projects
-// @access Private
+// @access Public
 const getProjects = asyncHandler(async (req, res) => {
 	res.status(200).json({ message: 'Get Projects' });
 });
