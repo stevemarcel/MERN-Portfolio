@@ -6,6 +6,7 @@ import { notFound, errorHandler } from './middleware/errorMiddleware.js';
 
 // importing routes
 import projectRoutes from './routes/projectRoutes.js';
+import userRoutes from './routes/userRoutes.js';
 
 // Load env variables
 dotenv.config();
@@ -16,11 +17,12 @@ connectDB();
 // Initialize express app
 const app = express();
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.json()); // for json data in req.body
+app.use(express.urlencoded({ extended: false })); // for form data in req.body
 
 // Routes mounting
 app.use('/api/projects', projectRoutes);
+app.use('/api/users', userRoutes);
 
 // Error middleware mounting
 app.use(notFound);

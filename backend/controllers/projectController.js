@@ -1,5 +1,5 @@
 import asyncHandler from 'express-async-handler';
-import Projects from '../models/projectModel.js';
+import Project from '../models/projectModel.js';
 
 // @desc Create project
 // @route POST /api/projects
@@ -17,7 +17,7 @@ const createProject = asyncHandler(async (req, res) => {
 // @route GET /api/projects
 // @access Public
 const getProjects = asyncHandler(async (req, res) => {
-	const projects = await Projects.find({});
+	const projects = await Project.find({});
 	res.status(200).json(projects);
 });
 
@@ -25,7 +25,7 @@ const getProjects = asyncHandler(async (req, res) => {
 // @route GET /api/projects/id
 // @access Public
 const getProjectById = asyncHandler(async (req, res) => {
-	const project = await Projects.findById(req.params.id);
+	const project = await Project.findById(req.params.id);
 
 	if (project) {
 		res.status(200).json(project);

@@ -6,7 +6,7 @@ import {
 	updateProject,
 	deleteProjects,
 } from '../controllers/projectController.js';
-const router = express.Router();
+const router = express.Router(); // for routing
 
 router.route('/').get(getProjects).post(createProject);
 router.route('/:id').get(getProjectById).put(updateProject).delete(deleteProjects);

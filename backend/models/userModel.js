@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import bcrypt from 'bcryptjs';
 
 const userSchema = new mongoose.Schema(
 	{
@@ -10,7 +11,7 @@ const userSchema = new mongoose.Schema(
 			type: String,
 			required: true,
 			unique: true,
-      lowercase: true,
+			lowercase: true,
 		},
 		password: {
 			type: String,
@@ -32,6 +33,11 @@ const userSchema = new mongoose.Schema(
 	},
 );
 
-const User = mongoose.model('User', userSchema);
+// Match entered password to hashed password in database
+userSchema.methods.matchPassword = function (enteredPassword) {
+	return bcrypt.compare(enteredPassword, this.password); // compare enteredPassword with this user's password
+};
+
+const User = mongoose.model('User', userSchema); // create User model from userSchema
 
 export default User;
