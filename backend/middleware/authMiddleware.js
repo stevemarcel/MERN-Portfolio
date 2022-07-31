@@ -28,6 +28,16 @@ const protect = asyncHandler(async (req, res, next) => {
 	}
 });
 
+const adminOnly = asyncHandler(async (req, res, next) => {
+	// if user is logged in and user is admin
+	if (req.user && req.user.isAdmin) {
+		next();
+	} else {
+		res.status(401);
+		throw new Error('Not authorized, admin only');
+	}
+});
+
 const encryptPassword = async function (next) {
 	// encrypt password before saving user
 	if (this.isModified('password')) {
@@ -40,4 +50,4 @@ const encryptPassword = async function (next) {
 	}
 };
 
-export { protect, encryptPassword };
+export { protect, adminOnly, encryptPassword };

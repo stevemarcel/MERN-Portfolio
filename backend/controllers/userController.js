@@ -126,4 +126,27 @@ const updateUserProfile = asyncHandler(async (req, res) => {
 	}
 });
 
-export { authUser, registerUser, getUserProfile, updateUserProfile };
+// @desc Get all users
+// @route GET /api/users
+// @access Private/admin only
+const getUsers = asyncHandler(async (req, res) => {
+	const users = await User.find({});
+	res.status(200).json(users);
+});
+
+// @desc Delete user
+// @route DELETE /api/users/:id
+// @access Private/admin only
+const deleteUser = asyncHandler(async (req, res) => {
+	// get user with user's id that was decoded from protect middleware
+	const user = await User.findById(req.params.id);
+	if (user) {
+		await user.remove();
+		res.status(200).json({ message: 'User deleted' });
+	} else {
+		res.status(404);
+		throw new Error('User not found');
+	}
+});
+
+export { authUser, registerUser, getUserProfile, updateUserProfile, getUsers, deleteUser };

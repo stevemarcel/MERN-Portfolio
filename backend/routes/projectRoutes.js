@@ -8,7 +8,13 @@ import {
 } from '../controllers/projectController.js';
 const router = express.Router(); // for routing
 
-router.route('/').get(getProjects).post(createProject);
-router.route('/:id').get(getProjectById).put(updateProject).delete(deleteProjects);
+// get all projects
+// create a new project (protected)
+router.route('/').get(getProjects).post(createProject); 
+
+// get single project
+// update project (protected)
+// delete project (protected)
+router.route('/:id').get(getProjectById).put(updateProject).delete(deleteProjects); 
 
 export default router;
