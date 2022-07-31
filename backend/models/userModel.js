@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
 import bcrypt from 'bcryptjs';
+import { encryptPassword } from '../middleware/authMiddleware.js';
 
 const userSchema = new mongoose.Schema(
 	{
@@ -34,9 +35,11 @@ const userSchema = new mongoose.Schema(
 );
 
 // Match entered password to hashed password in database
-userSchema.methods.matchPassword = function (enteredPassword) {
-	return bcrypt.compare(enteredPassword, this.password); // compare enteredPassword with this user's password
+userSchema.methods.matchPassword = async function (enteredPassword) {
+	return await bcrypt.compare(enteredPassword, this.password); // compare enteredPassword with this user's password
 };
+
+userSchema.pre('save', encryptPassword); // encrypt password before saving
 
 const User = mongoose.model('User', userSchema); // create User model from userSchema
 
